@@ -1,0 +1,18 @@
+%h1 Notes
+
+- @notes.each do |note|
+  %p
+    %strong Name:
+    = note.name
+  %p
+    %strong Content:
+    = note.content
+
+%h2 New Note
+
+= form_with model: Note.new do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :content
+  = f.text_area :content
+  = f.submit

@@ -1,0 +1,16 @@
+%div.space-y-4
+  %div.flex.items-center.justify-between
+    %h2.text-lg.leading-6.font-medium.text-gray-900= @workspace.name
+    = link_to 'Delete', workspace_path(@workspace), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-red-500 hover:text-red-700'
+  %div.text-sm.text-gray-500
+    Created by #{@workspace.creator.email}
+  %div.text-sm.text-gray-500
+    Room url: #{@workspace.room_url}
+  #daily-iframe.h-screen.w-screen
+  :javascript
+    document.addEventListener('DOMContentLoaded', function() {
+      const callFrame = window.DailyIframe.createFrame(document.getElementById('daily-iframe'));
+      callFrame.join({ url: "#{@workspace.room_url}" });
+    });
+
+%script{src: "https://unpkg.com/@daily-co/daily-js"}
